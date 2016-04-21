@@ -1,6 +1,6 @@
 # PHP + NGINX Container #----------------------------------
 php-nginx:
-  image: laradock/php56nginx:0.1.0
+  image: joschne/php56nginx:0.1.0
   container_name: php-nginx
   ports:
     - "80:80"
@@ -26,6 +26,31 @@ mysql:
     MYSQL_USER: homestead
     MYSQL_PASSWORD: secret
   privileged: true
+  
+  
+# PostgreSQL Container #----------------------------------------
+# inspired by https://github.com/sameersbn/docker-postgresql/blob/master/docker-compose.yml
+PostgreSQL:
+  restart: always
+  image: sameersbn/postgresql:9.4-19
+  ports:
+    - "5432:5432"
+  environment:
+    - DEBUG=false
+
+    - DB_USER=postgres
+    - DB_PASS=postgres
+    - DB_NAME=postgres_db
+#    - DB_TEMPLATE=
+
+#    - DB_EXTENSION=postgis,postgis_topology
+
+#    - REPLICATION_MODE=
+#    - REPLICATION_USER=
+#    - REPLICATION_PASS=
+#    - REPLICATION_SSLMODE=
+  volumes:
+    - /srv/docker/postgresql:/var/lib/postgresql
 
 # Redis Container #----------------------------------------
 redis:
