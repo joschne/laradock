@@ -1,6 +1,6 @@
 # PHP + NGINX Container #----------------------------------
 php-nginx:
-  image: joschne/php56nginx:0.1.0
+  image: joschne/php56nginx:latest
   container_name: php-nginx
   ports:
     - "80:80"
@@ -26,8 +26,8 @@ mysql:
     MYSQL_USER: homestead
     MYSQL_PASSWORD: secret
   privileged: true
-  
-  
+
+
 # PostgreSQL Container #----------------------------------------
 # inspired by https://github.com/sameersbn/docker-postgresql/blob/master/docker-compose.yml
 PostgreSQL:
