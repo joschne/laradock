@@ -36,11 +36,14 @@ PostgreSQL:
   ports:
     - "5432:5432"
   environment:
-    - DEBUG=false
+#    - DEBUG=false
 
+    - PG_PASSWORD=postgres
     - DB_USER=postgres
     - DB_PASS=postgres
     - DB_NAME=postgres_db
+#   - PG_HOME=/var/lib/pgsql
+
 #    - DB_TEMPLATE=
 
 #    - DB_EXTENSION=postgis,postgis_topology
@@ -48,9 +51,11 @@ PostgreSQL:
 #    - REPLICATION_MODE=
 #    - REPLICATION_USER=
 #    - REPLICATION_PASS=
-#    - REPLICATION_SSLMODE=
-  volumes:
-    - /srv/docker/postgresql:/var/lib/postgresql
+#    - REPLICATION_SSLMODE
+  volumes_from:
+    - data
+#  volumes:
+#    - ./data/postgres:/var/lib/postgresql
 
 # Redis Container #----------------------------------------
 redis:
