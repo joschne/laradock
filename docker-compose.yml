@@ -9,53 +9,24 @@ php-nginx:
     - ../:/var/www
     - ./logs/nginx:/var/log/nginx
   links:
-    - mysql
+    - postgis
     - redis
-  privileged: true
-
-# MySQL Container #----------------------------------------
-mysql:
-  image: laradock/mysql:0.1.0
-  container_name: mysql
-  ports:
-    - "3306:3306"
-  volumes_from:
-    - data
-  environment:
-    MYSQL_DATABASE: homestead
-    MYSQL_USER: homestead
-    MYSQL_PASSWORD: secret
   privileged: true
 
 
 # PostgreSQL Container #----------------------------------------
-# inspired by https://github.com/sameersbn/docker-postgresql/blob/master/docker-compose.yml
-PostgreSQL:
-  restart: always
-  image: sameersbn/postgresql:9.4-19
+postgis:
+  container_name: postgis
+#  restart: always
+  image: kartoza/postgis
   ports:
     - "5432:5432"
-  environment:
-#    - DEBUG=false
-
-    - PG_PASSWORD=postgres
-    - DB_USER=postgres
-    - DB_PASS=postgres
-    - DB_NAME=postgres_db
-#   - PG_HOME=/var/lib/pgsql
-
-#    - DB_TEMPLATE=
-
-#    - DB_EXTENSION=postgis,postgis_topology
-
-#    - REPLICATION_MODE=
-#    - REPLICATION_USER=
-#    - REPLICATION_PASS=
-#    - REPLICATION_SSLMODE
-  volumes_from:
-    - data
+#  environment:
+#  volumes_from:
+#    - data
 #  volumes:
 #    - ./data/postgres:/var/lib/postgresql
+
 
 # Redis Container #----------------------------------------
 redis:
@@ -76,6 +47,8 @@ data:
   volumes:
     - /var/lib/mysql
     - /var/lib/redis
+    - /var/lib/postgresql
+
 
 # Beanstalkd Container #-----------------------------------
 # beanstalkd:
